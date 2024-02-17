@@ -135,13 +135,12 @@ for (let i = 0; i < 4; i++) {
         }
       }
       if (selected === '=' && secondNumber) {
-        const res = operate(firstNumber, secondNumber, operator);
+        let res = operate(firstNumber, secondNumber, operator);
 
         if (String(res).length > 12) {
-          resultBox.textContent = `${String(res)[0]}.${String(res).slice(1, 4)}e+${calcPower(res)}`;
-        } else {
-          resultBox.textContent = res;
-        }
+          res = res.toExponential(3);
+        } 
+        resultBox.textContent = res;
 
         history.textContent = `${firstNumber} ${operator} ${secondNumber}`;
 
@@ -210,12 +209,6 @@ function operate(a, b , operator) {
     result = Math.floor(result)
   }
   return result;
-}
-
-function calcPower(a) {
-  a = String(a.length - 1)
-  console.log(a)
-  return a
 }
 
 function negateString(a) {
