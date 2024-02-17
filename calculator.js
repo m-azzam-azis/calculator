@@ -82,23 +82,31 @@ for (let i = 0; i < 4; i++) {
         history.textContent=`${firstNumber} ${selected}`;
         
       } 
+
       else if (extraOperators.includes(selected)) {
         const res = operate(firstNumber, 0, selected)
         if ((firstNumber === '0' || secondNumber === '0') && selected === '+/-') {
           resultBox.textContent = `${isNegative ? '' : '-'}0`;
           negateNext = true;
         }
-        else if (firstNumber && !operator) {
+        else if (!operator) {
           history.textContent = `${firstNumber} ${selected}`;
           firstNumber = String(res);
           resultBox.textContent = res;
+        } else if (operator) {
+          secondNumber = String(res);
+          resultBox.textContent = res;
         }
       }
+
       else if (selected === 'AC') {
         [firstNumber, secondNumber, operator] = ['0', '', '']
         resultBox.textContent = 0;
         history.textContent = '';
+        isNegative = false;
+        negateNext = false;
       }
+
       else if (selected === '\u232B') {
 
         if (!operator) {
