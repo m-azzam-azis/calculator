@@ -43,7 +43,7 @@ for (let i = 0; i < 4; i++) {
       let selected = button.textContent;
 
       if (/^[0-9]*$/.test(selected)) {
-        if (!operator && firstNumber.length < 12) {
+        if (!basicOperators.includes(operator) && firstNumber.length < 12) {
           if (firstNumber==='0') {firstNumber=''}
           firstNumber += selected;
           if (negateNext) {
@@ -90,7 +90,7 @@ for (let i = 0; i < 4; i++) {
         }
         else if (firstNumber && !operator) {
           history.textContent = `${firstNumber} ${selected}`;
-          firstNumber = res;
+          firstNumber = String(res);
           resultBox.textContent = res;
         }
       }
